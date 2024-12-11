@@ -1,0 +1,90 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body {
+  font-family: "Nunito Sans", sans-serif;
+  font-size: 14px;
+  font-weight: 400;
+  color: #656774;
+  background-color: #f5f9fe;
+}
+
+header {
+  background-color: rgb(245, 249, 254);
+  box-shadow: rgb(226, 235, 252) 0px 2px 4px;
+  position: fixed;
+  width: 100%;
+  z-index: 10;
+}
+
+.content {
+  width: 100%;
+  min-height: 100vh;
+  background: #74ebd5;
+  background: linear-gradient(to right, #acb6e5, #74ebd5);
+}
+
+.navbar {
+  min-width: 250px;
+  max-width: 250px;
+  background: #7a8cd7;
+  color: #fff;
+  transition: all 0.3;
+}
+
+.navbar-header {
+  background: #7485ce;
+}
+
+.navbar ul li a:hover {
+  color: #7386d5;
+  background: #fff;
+}
+
+.navbar ul {
+  padding: 20px 0;
+  border-bottom: 1px solid #47748b;
+}
+
+.input-group-text {
+  align-items: center;
+  padding: 0.375rem 0.75rem;
+  margin-bottom: 0;
+  font-size: 1rem;
+  font-weight: 400;
+  line-height: 1.5;
+  color: #495057;
+  text-align: center;
+  white-space: nowrap;
+  background-color: #e9ecef;
+  border: 1px solid #dee2e6;
+}
+
+table tr th,
+td {
+  border: 1px solid #dee2e6;
+  max-width: 100%;
+  margin: 2rem;
+  padding: 0.75rem 1.5rem;
+  background-color: transparent;
+  border-collapse: collapse;
+}
+
+#SapXepGiam {
+  display: none;
+}
+
+input[type="number"]::-webkit-outer-spin-button,
+input[type="number"]::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+.invalid-feedback {
+  display: block;
+  width: 100%;
+  margin-top: 0.25rem;
+  font-size: 80%;
+  color: rgb(220, 53, 69);
+}
