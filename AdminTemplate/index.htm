@@ -1,0 +1,389 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Admin Capstone</title>
+    <!-- STYLE CSS -->
+    <link rel="stylesheet" href="./../assets/css/output.css" />
+    <!-- FONT AWESOME -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.1/css/all.min.css"
+      integrity="sha512-5Hs3dF2AEPkpNAR7UiOHba+lRSJNeM2ECkwxUIxC1Q/FLycGTbNapWXB4tP889k5T5Ju8fs4b1P5z/iB4nMfSQ=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <!-- FLOWBITE JS -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/flowbite@2.5.2/dist/flowbite.min.css"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <section class="flex items-stretch">
+      <!-- Sidebar Holder -->
+      <div class="navbar w-64">
+        <div class="navbar-header p-5">
+          <a href="#" class="flex items-center ps-2.5 mb-5">
+            <img
+              src="https://flowbite.com/docs/images/logo.svg"
+              class="h-6 me-3 sm:h-7"
+              alt="Flowbite Logo"
+            />
+            <h3 class="text-3xl font-semibold whitespace-nowrap">ATPhone</h3>
+          </a>
+        </div>
+
+        <ul class="space-y-2 font-semibold py-5">
+          <li>
+            <a
+              href="#"
+              class="flex items-center text-xl p-2 rounded-none group"
+            >
+              <i class="fa-solid fa-house mr-3"></i>
+              Home
+            </a>
+          </li>
+          <li>
+            <a
+              href="#"
+              class="flex items-center text-xl p-2 rounded-none group"
+            >
+              <i class="fa fa-briefcase mr-3"></i>
+              About
+            </a>
+          </li>
+          <li>
+            <a
+              href="#"
+              class="flex items-center text-xl p-2 rounded-none group"
+            >
+              <i class="fa-solid fa-hard-drive mr-3"></i>
+              Services
+            </a>
+          </li>
+          <li>
+            <a
+              href="./../HomeTemplate/index.html"
+              target="_blank"
+              class="flex items-center text-xl p-2 rounded-none group"
+            >
+              <i class="fa-solid fa-landmark-dome mr-3"></i>
+              HomeTemplate
+            </a>
+          </li>
+          <li>
+            <a
+              href="#"
+              class="flex items-center text-xl p-2 rounded-none group"
+            >
+              <i class="fa-solid fa-paper-plane mr-3"></i>
+              Contact
+            </a>
+          </li>
+          <li>
+            <a
+              href="#"
+              class="flex items-center text-xl p-2 rounded-none group"
+            >
+              <i class="fa-solid fa-arrow-right-from-bracket mr-3"></i>
+              Sign In
+            </a>
+          </li>
+        </ul>
+      </div>
+
+      <!-- Page Content Holder -->
+      <div class="flex-1 content p-5 border-b-1">
+        <div class="p-4 bg-white w-auto mb-10 rounded-md shadow-sm">
+          <h1 class="text-center font-semibold text-5xl text-blue-600">
+            Trang quản trị
+          </h1>
+        </div>
+        <div class="p-4 bg-white w-auto rounded-md shadow-sm">
+          <div class="p-4 border-b-2">
+            <div class="flex w-1/2">
+              <h2 class="text-left font-bold text-3xl text-blue-600">
+                Danh sách sản phẩm
+              </h2>
+            </div>
+          </div>
+          <div class="flex justify-between items-center p-4">
+            <div class="flex w-1/2">
+              <input
+                id="searchName"
+                class="w-full rounded-sm border-gray-300 focus:outline-none px-5 py-2.5"
+                type="text"
+                placeholder="Tên sản phẩm"
+              />
+              <span class="flex input-group-text">
+                <i class="fa fa-search"></i>
+              </span>
+            </div>
+            <div class="flex w-1/2 justify-end">
+              <button
+                id="btnThem"
+                type="button"
+                data-modal-target="default-modal"
+                data-modal-toggle="default-modal"
+                class="text-white bg-blue-500 hover:bg-blue-700 focus:ring-4 focus:ring-blue-300 font-normal rounded-lg text-base px-5 py-2.5"
+              >
+                Thêm sản phẩm
+              </button>
+              <div
+                id="default-modal"
+                tabindex="-1"
+                aria-hidden="true"
+                class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full"
+              >
+                <div class="relative p-4 w-full max-w-2xl max-h-full">
+                  <!-- Modal content -->
+                  <div class="relative bg-white rounded-lg shadow">
+                    <!-- Modal header -->
+                    <div
+                      class="flex items-center justify-between p-4 md:p-5 border-b rounded-t"
+                    >
+                      <h3
+                        class="modal-title text-xl font-semibold text-gray-900"
+                      >
+                        Add Product
+                      </h3>
+                      <button
+                        id="close"
+                        type="button"
+                        class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center"
+                        data-modal-hide="default-modal"
+                      >
+                        <svg
+                          class="w-3 h-3"
+                          aria-hidden="true"
+                          xmlns="http://www.w3.org/2000/svg"
+                          fill="none"
+                          viewBox="0 0 14 14"
+                        >
+                          <path
+                            stroke="currentColor"
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                            stroke-width="2"
+                            d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6"
+                          />
+                        </svg>
+                        <span class="sr-only">Close modal</span>
+                      </button>
+                    </div>
+                    <!-- Modal body -->
+                    <div class="modal-body p-6">
+                      <div class="mb-4">
+                        <label
+                          for="TenSP"
+                          class="block text-base font-semibold text-gray-700"
+                          >Tên Sản Phẩm</label
+                        >
+                        <input
+                          id="TenSP"
+                          type="text"
+                          class="mt-1 block w-full px-3 py-2 bg-white border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
+                          placeholder="Nhập vào tên sản phẩm"
+                        />
+                        <div id="invalidName" class="invalid-feedback"></div>
+                      </div>
+                      <div class="mb-4">
+                        <label
+                          for="GiaSP"
+                          class="block text-base font-semibold text-gray-700"
+                          >Giá</label
+                        >
+                        <input
+                          id="GiaSP"
+                          type="text"
+                          class="mt-1 block w-full px-3 py-2 bg-white border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
+                          placeholder="Nhập vào giá"
+                        />
+                        <div id="invalidGia" class="invalid-feedback"></div>
+                      </div>
+                      <div class="mb-4">
+                        <label
+                          for="ScreenSP"
+                          class="block text-base font-semibold text-gray-700"
+                          >Màn hình rộng</label
+                        >
+                        <input
+                          id="ScreenSP"
+                          type="text"
+                          class="mt-1 block w-full px-3 py-2 bg-white border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
+                          placeholder="Nhập chiều rộng màn hình"
+                        />
+                        <div id="invalidScreen" class="invalid-feedback"></div>
+                      </div>
+                      <div class="mb-4">
+                        <label
+                          for="BackCameraSP"
+                          class="block text-base font-semibold text-gray-700"
+                          >Camera sau</label
+                        >
+                        <input
+                          id="BackCameraSP"
+                          type="text"
+                          class="mt-1 block w-full px-3 py-2 bg-white border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
+                          placeholder="Nhập thông số Camera sau"
+                        />
+                        <div id="invalidBack" class="invalid-feedback"></div>
+                      </div>
+                      <div class="mb-4">
+                        <label
+                          for="FrontCameraSP"
+                          class="block text-base font-semibold text-gray-700"
+                          >Camera trước</label
+                        >
+                        <input
+                          id="FrontCameraSP"
+                          type="text"
+                          class="mt-1 block w-full px-3 py-2 bg-white border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
+                          placeholder="Nhập thông số Camera trước"
+                        />
+                        <div id="invalidFront" class="invalid-feedback"></div>
+                      </div>
+                      <div class="mb-4">
+                        <label
+                          for="HinhSP"
+                          class="block text-base font-semibold text-gray-700"
+                          >Hình Ảnh</label
+                        >
+                        <input
+                          id="HinhSP"
+                          type="text"
+                          class="mt-1 block w-full px-3 py-2 bg-white border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
+                          placeholder="Nhập vào hình sản phẩm"
+                        />
+                        <div id="invalidHinh" class="invalid-feedback"></div>
+                      </div>
+                      <div class="mb-4">
+                        <label
+                          for="LoaiSP"
+                          class="block text-base font-semibold text-gray-700"
+                          >Loại Sản Phẩm</label
+                        >
+                        <select
+                          id="LoaiSP"
+                          class="mt-1 block w-full px-3 py-2 bg-white border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
+                        >
+                          <option value="Chọn loại">Chọn loại sản phẩm</option>
+                          <option value="iphone">iPhone</option>
+                          <option value="samsung">Samsung</option>
+                        </select>
+                        <div id="invalidLoai" class="invalid-feedback"></div>
+                      </div>
+                      <div class="mb-4">
+                        <label
+                          for="MoTa"
+                          class="block text-base font-semibold text-gray-700"
+                          >Mô tả</label
+                        >
+                        <textarea
+                          id="MoTa"
+                          class="mt-1 block w-full px-3 py-2 bg-white border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
+                        ></textarea>
+                        <div id="invalidMoTa" class="invalid-feedback"></div>
+                      </div>
+                    </div>
+
+                    <!-- Modal footer -->
+                    <div
+                      class="modal-footer flex justify-end items-center p-4 md:p-5 border-t border-gray-200 rounded-b space-x-2"
+                    >
+                      <button
+                        data-modal-hide="static-modal"
+                        type="button"
+                        class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center"
+                      >
+                        Thêm sản phẩm
+                      </button>
+                      <button
+                        data-modal-hide="default-modal"
+                        type="button"
+                        class="focus:outline-none text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5"
+                      >
+                        Đóng
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="flex justify-start items-center px-4">
+            <select class="font-medium rounded-md" id="selGia">
+              <option value="all">Giá</option>
+              <option value="loai1">Giá từ thấp tới cao</option>
+              <option value="loai2">Giá từ cao tới thấp</option>
+            </select>
+          </div>
+          <div id="tblSanPham" class="relative p-3">
+            <table class="w-full">
+              <thead class="text-blue-700 uppercase text-lg text-center">
+                <tr>
+                  <th scope="col" class="p-3 w-2/5">ID</th>
+                  <th scope="col" class="p-3 w-2/5">Tên</th>
+                  <th scope="col" class="p-3 w-2/5">Giá</th>
+                  <th scope="col" class="p-3 w-2/5">Màn hình rộng</th>
+                  <th scope="col" class="p-3 w-2/5">Camera sau</th>
+                  <th scope="col" class="p-3 w-2/5">Camera trước</th>
+                  <th scope="col" class="p-3 w-2/5">Hình ảnh</th>
+                  <th scope="col" class="p-3 w-2/5">Loại</th>
+                  <th scope="col" class="p-3 w-2/5">description</th>
+                  <th scope="col" class="p-3 w-2/5">Action</th>
+                </tr>
+              </thead>
+              <tbody
+                id="tblDanhSachSP"
+                class="font-semibold text-base text-center"
+              >
+                <tr>
+                  <td>1</td>
+                  <td>iphoneX</td>
+                  <td>1000</td>
+                  <td>screen 68</td>
+                  <td>2 camera 12 MP</td>
+                  <td>7 MP</td>
+                  <td>
+                    <img
+                      src="https://cdn.tgdd.vn/Products/Images/42/114115/iphone-x-64gb-hh-600x600.jpg"
+                      width="50"
+                      td=""
+                    />
+                  </td>
+                  <td>Iphone</td>
+                  <td>Thiết kế mang tính đột phá</td>
+                  <td>
+                    <button
+                      class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 focus:outline-none"
+                    >
+                      Edit
+                    </button>
+                    <button
+                      class="focus:outline-none text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2"
+                    >
+                      Delete
+                    </button>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- FLOWBITE JS -->
+    <script src="https://cdn.jsdelivr.net/npm/flowbite@2.5.2/dist/flowbite.min.js"></script>
+    <!-- jquery -->
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"
+      integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    ></script>
+  </body>
+</html>
