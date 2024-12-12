@@ -22,7 +22,6 @@ const renderListProduct = (data) => {
             <span class="text-gray-600 text-base py-3">Camera trước: ${product.frontCamera}</span>
             <span class="text-gray-600 text-base py-3">Màn hình rộng: ${product.screen}</span>
             <span class="text-gray-600 text-base py-3">Camera sau: ${product.backCamera}</span>
-            <span class="hidden">Camera sau: ${product.type}</span>
         </div>
         <div class="flex flex-wrap justify-between items-center">
             <span class="text-2xl font-bold text-red-600">$${product.price}</span>
