@@ -113,11 +113,23 @@
         <h1 class="text-center my-6 text-3xl font-bold">-Shopping Phone-</h1>
       </div>
       <!-- Modal -->
-      <div>
+      <div class="p-4">
         <div
-          class="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4"
+          class="max-w-screen-xl flex items-center justify-between mx-auto p-4"
         >
-          <!-- Left Button -->
+          <!-- Dropdown -->
+          <div class="select-container">
+            <select
+              id="productFilter"
+              class="block w-50 bg-white border border-gray-300 hover:border-gray-500 px-4 py-2 pr-8 rounded-lg shadow leading-tight focus:outline-none focus:shadow-outline"
+              onchange="filterProducts()"
+            >
+              <option value="all">All</option>
+              <option value="samsung">Samsung</option>
+              <option value="iphone">Iphone</option>
+            </select>
+          </div>
+          <!-- Nút Giỏ Hàng (Cart) -->
           <button
             data-modal-target="default-modal"
             data-modal-toggle="default-modal"
@@ -126,219 +138,172 @@
           >
             Cart (<span id="cartItemCount">0</span>)
           </button>
-          <!-- Right Button -->
-          <button
-            id="dropdownDefaultButton"
-            data-dropdown-toggle="dropdown"
-            class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center"
-            type="button"
-          >
-            Filter
-            <svg
-              class="w-2.5 h-2.5 ms-3"
-              aria-hidden="true"
-              xmlns="http://www.w3.org/2000/svg"
-              fill="none"
-              viewBox="0 0 10 6"
-            >
-              <path
-                stroke="currentColor"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                stroke-width="2"
-                d="m1 1 4 4 4-4"
-              />
-            </svg>
-          </button>
         </div>
-
-        <!-- Main modal -->
-        <div
-          id="default-modal"
-          tabindex="-1"
-          aria-hidden="true"
-          class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full"
-        >
-          <div class="relative p-4 w-full max-w-2xl max-h-full">
-            <!-- Modal content -->
-            <div class="relative bg-white rounded-lg shadow">
-              <!-- Modal header -->
-              <div
-                class="flex items-center justify-between p-4 md:p-5 border-b rounded-t"
+      </div>
+      <!-- Main modal -->
+      <div
+        id="default-modal"
+        tabindex="-1"
+        aria-hidden="true"
+        class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full"
+      >
+        <div class="relative p-4 w-full max-w-2xl max-h-full">
+          <!-- Modal content -->
+          <div class="relative bg-white rounded-lg shadow">
+            <!-- Modal header -->
+            <div
+              class="flex items-center justify-between p-4 md:p-5 border-b rounded-t"
+            >
+              <h3 class="text-xl font-semibold text-gray-900">Cart</h3>
+              <button
+                type="button"
+                class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center"
+                data-modal-hide="default-modal"
               >
-                <h3 class="text-xl font-semibold text-gray-900">Cart</h3>
-                <button
-                  type="button"
-                  class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center"
-                  data-modal-hide="default-modal"
+                <svg
+                  class="w-3 h-3"
+                  aria-hidden="true"
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 14 14"
                 >
-                  <svg
-                    class="w-3 h-3"
-                    aria-hidden="true"
-                    xmlns="http://www.w3.org/2000/svg"
-                    fill="none"
-                    viewBox="0 0 14 14"
-                  >
-                    <path
-                      stroke="currentColor"
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                      stroke-width="2"
-                      d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6"
-                    />
-                  </svg>
-                  <span class="sr-only">Close modal</span>
-                </button>
-              </div>
+                  <path
+                    stroke="currentColor"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6"
+                  />
+                </svg>
+                <span class="sr-only">Close modal</span>
+              </button>
+            </div>
 
-              <!-- Modal body -->
+            <!-- Modal body -->
 
-              <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
-                <table
-                  class="w-full text-sm text-left rtl:text-right text-black"
+            <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
+              <table class="w-full text-sm text-left rtl:text-right text-black">
+                <thead
+                  class="text-xs text-black text-center uppercase bg-gray-50"
                 >
-                  <thead
-                    class="text-xs text-black text-center uppercase bg-gray-50"
-                  >
-                    <tr>
-                      <th scope="col" class="px-6 py-3">ID</th>
-                      <th scope="col" class="px-6 py-3">Name</th>
-                      <th scope="col" class="px-6 py-3">Image</th>
-                      <th scope="col" class="px-6 py-3">Qty</th>
-                      <th scope="col" class="px-6 py-3">Price</th>
-                      <th scope="col" class="px-6 py-3">Total</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <tr class="bg-white border-b hover:bg-gray-50">
-                      <td class="px-6 py-4 font-semibold text-gray-900">
-                        Apple Watch
-                      </td>
-                      <td class="px-6 py-4 font-semibold text-gray-900">
-                        Apple Watch
-                      </td>
-                      <td class="p-4">
-                        <img
-                          src="https://cdn.tgdd.vn/Products/Images/42/114115/iphone-x-64gb-hh-600x600.jpg"
-                          class="w-16 md:w-8 max-w-1.5 max-h-1.5"
-                          alt="Apple Watch"
-                        />
-                      </td>
-                      <td class="px-6 py-4">
-                        <div class="flex items-center">
-                          <button
-                            class="inline-flex items-center justify-center p-1 me-3 text-sm font-medium h-6 w-6 text-white bg-red-500 border border-gray-300 rounded-full focus:outline-none hover:bg-red-800 focus:ring-4 focus:ring-red-300"
-                            type="button"
+                  <tr>
+                    <th scope="col" class="px-6 py-3">ID</th>
+                    <th scope="col" class="px-6 py-3">Name</th>
+                    <th scope="col" class="px-6 py-3">Image</th>
+                    <th scope="col" class="px-6 py-3">Qty</th>
+                    <th scope="col" class="px-6 py-3">Price</th>
+                    <th scope="col" class="px-6 py-3">Total</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr class="bg-white border-b hover:bg-gray-50">
+                    <td class="px-6 py-4 font-semibold text-gray-900">
+                      Apple Watch
+                    </td>
+                    <td class="px-6 py-4 font-semibold text-gray-900">
+                      Apple Watch
+                    </td>
+                    <td class="p-4">
+                      <img
+                        src="https://cdn.tgdd.vn/Products/Images/42/114115/iphone-x-64gb-hh-600x600.jpg"
+                        class="w-16 md:w-8 max-w-1.5 max-h-1.5"
+                        alt="Apple Watch"
+                      />
+                    </td>
+                    <td class="px-6 py-4">
+                      <div class="flex items-center">
+                        <button
+                          class="inline-flex items-center justify-center p-1 me-3 text-sm font-medium h-6 w-6 text-white bg-red-500 border border-gray-300 rounded-full focus:outline-none hover:bg-red-800 focus:ring-4 focus:ring-red-300"
+                          type="button"
+                        >
+                          <span class="sr-only">Quantity button</span>
+                          <svg
+                            class="w-3 h-3"
+                            aria-hidden="true"
+                            xmlns="http://www.w3.org/2000/svg"
+                            fill="none"
+                            viewBox="0 0 18 2"
                           >
-                            <span class="sr-only">Quantity button</span>
-                            <svg
-                              class="w-3 h-3"
-                              aria-hidden="true"
-                              xmlns="http://www.w3.org/2000/svg"
-                              fill="none"
-                              viewBox="0 0 18 2"
-                            >
-                              <path
-                                stroke="currentColor"
-                                stroke-linecap="round"
-                                stroke-linejoin="round"
-                                stroke-width="2"
-                                d="M1 1h16"
-                              />
-                            </svg>
-                          </button>
-                          <div>
-                            <input
-                              type="number"
-                              id="first_product"
-                              class="bg-gray-50 text-center w-14 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block px-2.5 py-1"
-                              placeholder="1"
-                              required
+                            <path
+                              stroke="currentColor"
+                              stroke-linecap="round"
+                              stroke-linejoin="round"
+                              stroke-width="2"
+                              d="M1 1h16"
                             />
-                          </div>
-                          <button
-                            class="inline-flex items-center justify-center h-6 w-6 p-1 ms-3 text-sm font-medium text-white bg-green-500 border border-gray-300 rounded-full focus:outline-none hover:bg-green-800 focus:ring-4 focus:ring-green-200"
-                            type="button"
-                          >
-                            <span class="sr-only">Quantity button</span>
-                            <svg
-                              class="w-3 h-3"
-                              aria-hidden="true"
-                              xmlns="http://www.w3.org/2000/svg"
-                              fill="none"
-                              viewBox="0 0 18 18"
-                            >
-                              <path
-                                stroke="currentColor"
-                                stroke-linecap="round"
-                                stroke-linejoin="round"
-                                stroke-width="2"
-                                d="M9 1v16M1 9h16"
-                              />
-                            </svg>
-                          </button>
+                          </svg>
+                        </button>
+                        <div>
+                          <input
+                            type="number"
+                            id="first_product"
+                            class="bg-gray-50 text-center w-14 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block px-2.5 py-1"
+                            placeholder="1"
+                            required
+                          />
                         </div>
-                      </td>
-                      <td class="px-6 py-4 font-semibold text-gray-900">
-                        $599
-                      </td>
-                      <td class="px-6 py-4 font-semibold text-gray-900">
-                        Apple Watch
-                      </td>
-                    </tr>
-                  </tbody>
-                </table>
-              </div>
+                        <button
+                          class="inline-flex items-center justify-center h-6 w-6 p-1 ms-3 text-sm font-medium text-white bg-green-500 border border-gray-300 rounded-full focus:outline-none hover:bg-green-800 focus:ring-4 focus:ring-green-200"
+                          type="button"
+                        >
+                          <span class="sr-only">Quantity button</span>
+                          <svg
+                            class="w-3 h-3"
+                            aria-hidden="true"
+                            xmlns="http://www.w3.org/2000/svg"
+                            fill="none"
+                            viewBox="0 0 18 18"
+                          >
+                            <path
+                              stroke="currentColor"
+                              stroke-linecap="round"
+                              stroke-linejoin="round"
+                              stroke-width="2"
+                              d="M9 1v16M1 9h16"
+                            />
+                          </svg>
+                        </button>
+                      </div>
+                    </td>
+                    <td class="px-6 py-4 font-semibold text-gray-900">$599</td>
+                    <td class="px-6 py-4 font-semibold text-gray-900">
+                      Apple Watch
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
 
-              <!-- Modal footer -->
-              <div
-                class="flex justify-end items-center p-4 md:p-5 border-t border-gray-200 rounded-b"
+            <!-- Modal footer -->
+            <div
+              class="flex justify-end items-center p-4 md:p-5 border-t border-gray-200 rounded-b"
+            >
+              <button
+                type="button"
+                class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center me-2"
               >
-                <button
-                  type="button"
-                  class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center me-2"
+                <svg
+                  class="w-3.5 h-3.5 me-2"
+                  aria-hidden="true"
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="currentColor"
+                  viewBox="0 0 18 21"
                 >
-                  <svg
-                    class="w-3.5 h-3.5 me-2"
-                    aria-hidden="true"
-                    xmlns="http://www.w3.org/2000/svg"
-                    fill="currentColor"
-                    viewBox="0 0 18 21"
-                  >
-                    <path
-                      d="M15 12a1 1 0 0 0 .962-.726l2-7A1 1 0 0 0 17 3H3.77L3.175.745A1 1 0 0 0 2.208 0H1a1 1 0 0 0 0 2h.438l.6 2.255v.019l2 7 .746 2.986A3 3 0 1 0 9 17a2.966 2.966 0 0 0-.184-1h2.368c-.118.32-.18.659-.184 1a3 3 0 1 0 3-3H6.78l-.5-2H15Z"
-                    />
-                  </svg>
-                  Buy now
-                </button>
-                <button
-                  data-modal-hide="default-modal"
-                  type="button"
-                  class="focus:outline-none text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5"
-                >
-                  Đóng
-                </button>
-              </div>
+                  <path
+                    d="M15 12a1 1 0 0 0 .962-.726l2-7A1 1 0 0 0 17 3H3.77L3.175.745A1 1 0 0 0 2.208 0H1a1 1 0 0 0 0 2h.438l.6 2.255v.019l2 7 .746 2.986A3 3 0 1 0 9 17a2.966 2.966 0 0 0-.184-1h2.368c-.118.32-.18.659-.184 1a3 3 0 1 0 3-3H6.78l-.5-2H15Z"
+                  />
+                </svg>
+                Buy now
+              </button>
+              <button
+                data-modal-hide="default-modal"
+                type="button"
+                class="focus:outline-none text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5"
+              >
+                Đóng
+              </button>
             </div>
           </div>
-        </div>
-
-        <!-- Dropdown menu -->
-        <div
-          id="dropdown"
-          class="z-10 hidden bg-white divide-y divide-gray-100 rounded-lg shadow w-44"
-        >
-          <ul
-            class="text-sm text-gray-700"
-            aria-labelledby="dropdownDefaultButton"
-          >
-            <li>
-              <a href="#" class="block px-4 py-2 hover:bg-gray-200">IPhone</a>
-            </li>
-            <li>
-              <a href="#" class="block px-4 py-2 hover:bg-gray-200">SamSung</a>
-            </li>
-          </ul>
         </div>
       </div>
       <!-- Table -->
@@ -346,167 +311,10 @@
         class="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4"
       >
         <div id="loader" style="display: none" class="loader"></div>
-        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-          <div
-            class="w-full bg-white border border-gray-200 rounded-lg shadow p-4"
-          >
-            <div>
-              <img
-                class="p-8 rounded-t-lg"
-                src="https://cdn.tgdd.vn/Products/Images/42/114115/iphone-x-64gb-hh-600x600.jpg"
-                alt="product image"
-              />
-            </div>
-            <div class="my-5">
-              <h5 class="text-2xl font-bold text-gray-900">IphoneX</h5>
-            </div>
-            <div class="mb-4">
-              <span class="text-lg font-semibold text-orange-500"
-                >"Thiết kế mang tính đột phá"</span
-              >
-            </div>
-            <div class="mb-6 flex flex-wrap justify-between">
-              <span class="text-gray-600 text-base py-3"
-                >Camera trước: 7 MP</span
-              >
-              <span class="text-gray-600 text-base py-3"
-                >Màn hình rộng: sreen 68</span
-              >
-              <span class="text-gray-600 text-base py-3"
-                >Camera sau: 2 camera 12 MP</span
-              >
-            </div>
-            <div class="flex flex-wrap justify-between items-center">
-              <span class="text-2xl font-bold text-red-600">$99.99</span>
-              <button
-                class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-base px-5 py-2.5"
-              >
-                Add to cart
-              </button>
-            </div>
-          </div>
-
-          <div
-            class="w-full bg-white border border-gray-200 rounded-lg shadow p-5"
-          >
-            <div>
-              <img
-                class="p-8 rounded-t-lg"
-                src="https://cdn.tgdd.vn/Products/Images/42/217536/samsung-galaxy-m51-trang-new-600x600-600x600.jpg"
-                alt="product image"
-              />
-            </div>
-            <div class="my-5">
-              <h5 class="text-2xl font-bold text-gray-900">
-                Samsung Galaxy M51
-              </h5>
-            </div>
-            <div class="mb-4">
-              <span class="text-lg font-semibold text-orange-500"
-                >"Thiết kế đột phá, màn hình tuyệt đỉnh"</span
-              >
-            </div>
-            <div class="mb-6 flex flex-wrap justify-between">
-              <span class="text-gray-600 text-base py-3"
-                >Camera trước: 32 MP</span
-              >
-              <span class="text-gray-600 text-base py-3"
-                >Màn hình rộng: 69</span
-              >
-              <span class="text-gray-600 text-base py-3"
-                >Camera sau: Chính 64 MP & Phụ 12 MP, 5 MP, 5 MP</span
-              >
-            </div>
-            <div class="flex flex-wrap justify-between items-center">
-              <span class="text-2xl font-bold text-red-600">$99.99</span>
-              <button
-                class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-base px-5 py-2.5"
-              >
-                Add to cart
-              </button>
-            </div>
-          </div>
-
-          <div
-            class="w-full bg-white border border-gray-200 rounded-lg shadow p-5"
-          >
-            <div>
-              <img
-                class="p-8 rounded-t-lg"
-                src="https://cdn.tgdd.vn/Products/Images/42/114115/iphone-x-64gb-hh-600x600.jpg"
-                alt="product image"
-              />
-            </div>
-            <div class="my-5">
-              <h5 class="text-2xl font-bold text-gray-900">
-                Samsung Galaxy M22
-              </h5>
-            </div>
-            <div class="mb-4">
-              <span class="text-lg font-semibold text-orange-500"
-                >"Thiết kế mang tính đột phá"</span
-              >
-            </div>
-            <div class="mb-6 flex flex-wrap justify-between">
-              <span class="text-gray-600 text-base py-3"
-                >Camera trước: 32 MP</span
-              >
-              <span class="text-gray-600 text-base py-3"
-                >Màn hình rộng: 70</span
-              >
-              <span class="text-gray-600 text-base py-3"
-                >Camera sau: Chính 12 MP & Phụ 64 MP, 12 MP</span
-              >
-            </div>
-            <div class="flex flex-wrap justify-between items-center">
-              <span class="text-2xl font-bold text-red-600">$99.99</span>
-              <button
-                class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-base px-5 py-2.5"
-              >
-                Add to cart
-              </button>
-            </div>
-          </div>
-
-          <div
-            class="w-full bg-white border border-gray-200 rounded-lg shadow p-5"
-          >
-            <div>
-              <img
-                class="p-8 rounded-t-lg"
-                src="https://cdn.tgdd.vn/Products/Images/42/153856/s16/iphone-11-white-1-2-3-650x650.png"
-                alt="product image"
-              />
-            </div>
-            <div class="mb-5">
-              <h5 class="text-2xl font-bold text-gray-900">Iphone 11</h5>
-            </div>
-            <div class="mb-4">
-              <span class="text-lg font-semibold text-orange-500"
-                >"Thiết kế đột phá, màn hình tuyệt đỉnh"</span
-              >
-            </div>
-            <div class="mb-4 flex flex-wrap justify-between">
-              <span class="text-gray-600 text-base py-3"
-                >Camera trước: 32 MP</span
-              >
-              <span class="text-gray-600 text-base py-3"
-                >Màn hình rộng: 54</span
-              >
-              <span class="text-gray-600 text-base py-3"
-                >Camera sau: Chính 12 MP & Phụ 64 MP, 12 MP</span
-              >
-            </div>
-            <div class="flex flex-wrap justify-between items-center">
-              <span class="text-2xl font-bold text-red-600">$99.99</span>
-              <button
-                class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-base px-5 py-2.5"
-              >
-                Add to cart
-              </button>
-            </div>
-          </div>
-        </div>
+        <div
+          id="mainProduct"
+          class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4"
+        ></div>
       </div>
     </section>
 
@@ -657,8 +465,6 @@
       </div>
     </footer>
 
-    <script type="module" src="./app/HomeJS/home.js"></script>
-
     <!-- FLOWBITE JS -->
     <script src="https://cdn.jsdelivr.net/npm/flowbite@2.5.2/dist/flowbite.min.js"></script>
 
@@ -669,5 +475,14 @@
       crossorigin="anonymous"
       referrerpolicy="no-referrer"
     ></script>
+
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.7.8/axios.min.js"
+      integrity="sha512-v8+bPcpk4Sj7CKB11+gK/FnsbgQ15jTwZamnBf/xDmiQDcgOIYufBo6Acu1y30vrk8gg5su4x0CG3zfPaq5Fcg=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    ></script>
+
+    <script type="module" src="./app/HomeJS/controllers/home.js"></script>
   </body>
 </html>
