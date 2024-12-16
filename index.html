@@ -131,10 +131,11 @@
           </div>
           <!-- Nút Giỏ Hàng (Cart) -->
           <button
+            id="cartButton"
+            type="button"
             data-modal-target="default-modal"
             data-modal-toggle="default-modal"
             class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center"
-            type="button"
           >
             Cart (<span id="cartItemCount">0</span>)
           </button>
@@ -145,16 +146,18 @@
         id="default-modal"
         tabindex="-1"
         aria-hidden="true"
-        class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full"
+        class="overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full hidden"
       >
-        <div class="relative p-4 w-full max-w-2xl max-h-full">
+        <div class="relative p-4 max-w-3xl max-h-full">
           <!-- Modal content -->
           <div class="relative bg-white rounded-lg shadow">
             <!-- Modal header -->
             <div
               class="flex items-center justify-between p-4 md:p-5 border-b rounded-t"
             >
-              <h3 class="text-xl font-semibold text-gray-900">Cart</h3>
+              <h3 class="modal-title text-xl font-semibold text-gray-900">
+                Cart
+              </h3>
               <button
                 type="button"
                 class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center"
@@ -180,9 +183,10 @@
             </div>
 
             <!-- Modal body -->
-
             <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
-              <table class="w-full text-sm text-left rtl:text-right text-black">
+              <table
+                class="w-full text-sm text-left rtl:text-right text-black p-4"
+              >
                 <thead
                   class="text-xs text-black text-center uppercase bg-gray-50"
                 >
@@ -193,115 +197,42 @@
                     <th scope="col" class="px-6 py-3">Qty</th>
                     <th scope="col" class="px-6 py-3">Price</th>
                     <th scope="col" class="px-6 py-3">Total</th>
+                    <th scope="col" class="px-6 py-3">Action</th>
                   </tr>
                 </thead>
-                <tbody>
-                  <tr class="bg-white border-b hover:bg-gray-50">
-                    <td class="px-6 py-4 font-semibold text-gray-900">
-                      Apple Watch
-                    </td>
-                    <td class="px-6 py-4 font-semibold text-gray-900">
-                      Apple Watch
-                    </td>
-                    <td class="p-4">
-                      <img
-                        src="https://cdn.tgdd.vn/Products/Images/42/114115/iphone-x-64gb-hh-600x600.jpg"
-                        class="w-16 md:w-8 max-w-1.5 max-h-1.5"
-                        alt="Apple Watch"
-                      />
-                    </td>
-                    <td class="px-6 py-4">
-                      <div class="flex items-center">
-                        <button
-                          class="inline-flex items-center justify-center p-1 me-3 text-sm font-medium h-6 w-6 text-white bg-red-500 border border-gray-300 rounded-full focus:outline-none hover:bg-red-800 focus:ring-4 focus:ring-red-300"
-                          type="button"
-                        >
-                          <span class="sr-only">Quantity button</span>
-                          <svg
-                            class="w-3 h-3"
-                            aria-hidden="true"
-                            xmlns="http://www.w3.org/2000/svg"
-                            fill="none"
-                            viewBox="0 0 18 2"
-                          >
-                            <path
-                              stroke="currentColor"
-                              stroke-linecap="round"
-                              stroke-linejoin="round"
-                              stroke-width="2"
-                              d="M1 1h16"
-                            />
-                          </svg>
-                        </button>
-                        <div>
-                          <input
-                            type="number"
-                            id="first_product"
-                            class="bg-gray-50 text-center w-14 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block px-2.5 py-1"
-                            placeholder="1"
-                            required
-                          />
-                        </div>
-                        <button
-                          class="inline-flex items-center justify-center h-6 w-6 p-1 ms-3 text-sm font-medium text-white bg-green-500 border border-gray-300 rounded-full focus:outline-none hover:bg-green-800 focus:ring-4 focus:ring-green-200"
-                          type="button"
-                        >
-                          <span class="sr-only">Quantity button</span>
-                          <svg
-                            class="w-3 h-3"
-                            aria-hidden="true"
-                            xmlns="http://www.w3.org/2000/svg"
-                            fill="none"
-                            viewBox="0 0 18 18"
-                          >
-                            <path
-                              stroke="currentColor"
-                              stroke-linecap="round"
-                              stroke-linejoin="round"
-                              stroke-width="2"
-                              d="M9 1v16M1 9h16"
-                            />
-                          </svg>
-                        </button>
-                      </div>
-                    </td>
-                    <td class="px-6 py-4 font-semibold text-gray-900">$599</td>
-                    <td class="px-6 py-4 font-semibold text-gray-900">
-                      Apple Watch
-                    </td>
-                  </tr>
-                </tbody>
+                <tbody
+                  id="cartTable"
+                  class="text-sm font-semibold text-black"
+                ></tbody>
               </table>
             </div>
 
             <!-- Modal footer -->
             <div
-              class="flex justify-end items-center p-4 md:p-5 border-t border-gray-200 rounded-b"
+              class="modal-footer flex justify-between items-center px-4 md:px-5 border-t border-gray-200 rounded-b"
             >
-              <button
-                type="button"
-                class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center me-2"
-              >
-                <svg
-                  class="w-3.5 h-3.5 me-2"
-                  aria-hidden="true"
-                  xmlns="http://www.w3.org/2000/svg"
-                  fill="currentColor"
-                  viewBox="0 0 18 21"
+              <div class="py-4">
+                <span id="totalPrice" class="font-bold text-2xl text-red-500"
+                  >Tổng: $0</span
                 >
-                  <path
-                    d="M15 12a1 1 0 0 0 .962-.726l2-7A1 1 0 0 0 17 3H3.77L3.175.745A1 1 0 0 0 2.208 0H1a1 1 0 0 0 0 2h.438l.6 2.255v.019l2 7 .746 2.986A3 3 0 1 0 9 17a2.966 2.966 0 0 0-.184-1h2.368c-.118.32-.18.659-.184 1a3 3 0 1 0 3-3H6.78l-.5-2H15Z"
-                  />
-                </svg>
-                Buy now
-              </button>
-              <button
-                data-modal-hide="default-modal"
-                type="button"
-                class="focus:outline-none text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5"
-              >
-                Đóng
-              </button>
+              </div>
+              <div class="py-4">
+                <button
+                  id="checkoutButton"
+                  type="button"
+                  class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center me-2"
+                  onclick="handleCheckout()"
+                >
+                  Mua ngay
+                </button>
+                <button
+                  data-modal-hide="default-modal"
+                  type="button"
+                  class="focus:outline-none text-white bg-gray-800 hover:bg-gray-900 focus:ring-4 focus:ring-gray-300 font-medium rounded-lg text-sm px-5 py-2.5"
+                >
+                  Đóng
+                </button>
+              </div>
             </div>
           </div>
         </div>
