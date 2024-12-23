@@ -9,7 +9,7 @@ const renderListPhone = (data) =>{
     data.forEach((product, i)=>{
         content +=`
         <tr>
-            <td>${i + 1}}</td>
+            <td>${i + 1}</td>
             <td>${product.name}</td>
             <td>${product.price}</td>
             <td>${product.screen}</td>
