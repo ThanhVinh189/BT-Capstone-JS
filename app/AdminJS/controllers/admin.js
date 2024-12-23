@@ -2,7 +2,7 @@ import Api from "../services/api.js";
 import Product from "../models/product.js";
 import validateProduct from "../models/validation.js";
 
-
+const getEleId = (id) => document.getElementById(id);
 
 const renderListPhone = (data) =>{
     let content = "";
