@@ -2,14 +2,12 @@ import Api from "../services/api.js";
 import Product from "../models/product.js";
 import validateProduct from "../models/validation.js";
 
-
-
 const renderListPhone = (data) =>{
     let content = "";
     data.forEach((product, i)=>{
         content +=`
         <tr>
-            <td>${i + 1}}</td>
+            <td>${i + 1}</td>
             <td>${product.name}</td>
             <td>${product.price}</td>
             <td>${product.screen}</td>
